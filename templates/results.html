@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Анализ файла {{ filename }}</title>
+    <style>
+        .container {
+            display: flex;
+            gap: 2rem;
+        }
+        .text-block {
+            width: 40%;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            white-space: pre-wrap;
+            background: #f9f9f9;
+        }
+        .table-block {
+            width: 60%;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+        }
+        th {
+            background-color: #eee;
+        }
+    </style>
+</head>
+<body>
+    <h2>TF-IDF для файла: {{ filename }}</h2>
+
+    <div class="container">
+        <!-- Исходный текст -->
+        <div class="text-block">
+            <strong>Текст файла:</strong><br><br>
+            {{ original_text }}
+        </div>
+
+        <!-- Таблица -->
+        <div class="table-block">
+            <table>
+                <tr>
+                    <th>Слово</th>
+                    <th>TF</th>
+                    <th>IDF</th>
+                    <th>TF × IDF</th>
+                </tr>
+                {% for word, tf, idf, tfidf in words %}
+                <tr>
+                    <td>{{ word }}</td>
+                    <td>{{ tf }}</td>
+                    <td>{{ idf }}</td>
+                    <td>{{ tfidf }}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
+
+    <br><a href="{{ url_for('index') }}">Назад</a>
+</body>
+</html>

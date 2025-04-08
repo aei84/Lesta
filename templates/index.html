@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>TF-IDF Анализатор</title>
+</head>
+<body>
+    <h2>Загрузите текстовый файл</h2>
+    <form action="{{ url_for('upload') }}" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept=".txt" required>
+        <button type="submit">Загрузить</button>
+    </form>
+
+    <br><hr>
+
+    <h3>Загруженные документы:</h3>
+    <ul>
+        {% for file in filenames %}
+            <li><a href="{{ url_for('analyze', filename=file) }}">{{ file }}</a></li>
+        {% else %}
+            <li>Нет загруженных файлов</li>
+        {% endfor %}
+    </ul>
+
+    <form action="{{ url_for('delete_all') }}" method="get">
+        <button type="submit" style="color: red;">Удалить все файлы</button>
+    </form>
+    <p>Эта страничка для прохождения собеседования в леста.
+сюда можно загрузить текстовые файлы, дальше по нажатию на файл будет вычислен TF в конкретном файле, 
+idf по всем документам каждого слова этого файла.</p>
+<form method="get" action="{{ url_for('copy_test_files') }}">
+    <button type="submit">Восстановить тестовые файлы</button>
+</form>
+</body>
+</html>
